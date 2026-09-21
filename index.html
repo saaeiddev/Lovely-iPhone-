@@ -565,7 +565,10 @@
     function openSafari(){toast.classList.remove('show');safariView.classList.add('open');safariView.setAttribute('aria-hidden','false');stopFloat()}
     function closeSafari(){safariView.classList.remove('open');safariView.setAttribute('aria-hidden','true');resumeFloat()}
     const safariApp=document.querySelector('.app.safari');
-    safariApp.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();openSafari()},true);
+    function activateSafari(e){e.preventDefault();e.stopPropagation();openSafari()}
+    safariApp.addEventListener('pointerup',activateSafari,true);
+    safariApp.addEventListener('touchend',activateSafari,{capture:true,passive:false});
+    safariApp.addEventListener('click',activateSafari,true);
     safariView.addEventListener('pointerdown',e=>e.stopPropagation());
     safariView.addEventListener('pointermove',e=>e.stopPropagation());
     safariView.addEventListener('dblclick',e=>e.stopPropagation());
