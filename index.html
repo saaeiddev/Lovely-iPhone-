@@ -300,6 +300,7 @@
 
 
     /* iOS-style Safari bookmarks */
+    .app.safari{touch-action:manipulation;cursor:pointer}
     .safari-view{position:absolute;inset:0;z-index:25;background:#f5f5f7;color:#111;opacity:0;transform:scale(.91);pointer-events:none;transition:opacity .28s ease,transform .34s cubic-bezier(.2,.8,.2,1);overflow:hidden;border-radius:47px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Arial,sans-serif}
     .safari-view.open{opacity:1;transform:scale(1);pointer-events:auto}
     .safari-shell{position:absolute;inset:0;padding:42px 12px 76px;background:linear-gradient(180deg,#fbfbfd,#eeeeF2)}
@@ -474,7 +475,7 @@
       stopFloat();rx=-4;ry=-14;zoom=1;apply();resumeFloat();
     });
 
-    document.querySelectorAll('.app').forEach(app=>{
+    document.querySelectorAll('.app:not(.photos):not(.safari)').forEach(app=>{
       app.addEventListener('pointerdown', e=>e.stopPropagation());
       app.addEventListener('click', e=>{
         e.stopPropagation();
@@ -565,10 +566,9 @@
     function openSafari(){toast.classList.remove('show');safariView.classList.add('open');safariView.setAttribute('aria-hidden','false');stopFloat()}
     function closeSafari(){safariView.classList.remove('open');safariView.setAttribute('aria-hidden','true');resumeFloat()}
     const safariApp=document.querySelector('.app.safari');
-    function activateSafari(e){e.preventDefault();e.stopPropagation();openSafari()}
-    safariApp.addEventListener('pointerup',activateSafari,true);
-    safariApp.addEventListener('touchend',activateSafari,{capture:true,passive:false});
-    safariApp.addEventListener('click',activateSafari,true);
+    safariApp.addEventListener('pointerdown',e=>e.stopPropagation());
+    safariApp.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();openSafari()});
+    safariApp.addEventListener('touchend',e=>{e.preventDefault();e.stopPropagation();openSafari()},{passive:false});
     safariView.addEventListener('pointerdown',e=>e.stopPropagation());
     safariView.addEventListener('pointermove',e=>e.stopPropagation());
     safariView.addEventListener('dblclick',e=>e.stopPropagation());
