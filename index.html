@@ -517,9 +517,9 @@
     window.addEventListener('pointermove', e=>{
       if(dragging || innerWidth<700) return;
       const x=(e.clientX/innerWidth-.5), y=(e.clientY/innerHeight-.5);
-      wrap.style.transform=\`scale(\${zoom}) translate3d(\${x*7}px,\${y*5}px,0)\`;
+      wrap.style.transform=`scale(${zoom}) translate3d(${x*7}px,${y*5}px,0)`;
     });
-    window.addEventListener('pointerleave',()=>{wrap.style.transform=\`scale(\${zoom})\`});
+    window.addEventListener('pointerleave',()=>{wrap.style.transform=`scale(${zoom})`});
 
     // Interactive Photos gallery using the eight uploaded images.
     const photosView = document.getElementById('photosView');
