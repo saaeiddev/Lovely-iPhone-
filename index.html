@@ -245,7 +245,19 @@
       filter:blur(13px);pointer-events:none;z-index:-1
     }
     @media(max-height:760px){:root{--phone-w:282px;--phone-h:577px}.titlebar{top:16px}.hint{bottom:12px}.clock{font-size:44px}.apps{gap:10px 11px}.icon{width:43px;height:43px}.glyph{font-size:20px}.dock{height:59px}.dock .icon{width:42px;height:42px}.hero-widget{margin-top:13px;min-height:72px}.camera-bump{transform:scale(.86);transform-origin:top left}}
-    @media(max-width:520px){:root{--phone-w:278px;--phone-h:568px}.titlebar{top:20px}.titlebar p{display:none}.hint{font-size:10px;padding:8px 12px}.clock{font-size:43px}.icon{width:42px;height:42px}.dock .icon{width:41px;height:41px}.apps{gap:10px 9px}.screen-content{padding-left:15px;padding-right:15px}}
+    @media(max-width:520px){
+      :root{--phone-w:278px;--phone-h:568px}
+      .titlebar{top:20px}.titlebar p{display:none}.hint{font-size:10px;padding:8px 12px}
+      .clock{font-size:43px}.icon{width:42px;height:42px}.dock .icon{width:41px;height:41px}
+      .apps{gap:10px 9px}.screen-content{padding-left:15px;padding-right:15px}
+      /* Mobile is interaction-first: keep the phone front-facing so 3D transforms never steal taps. */
+      .phone{transform:rotateX(0deg) rotateY(0deg)!important;animation:none!important;transition:none!important}
+      .phone-wrap{transform:scale(var(--zoom));touch-action:manipulation}
+      .front{backface-visibility:visible;z-index:10}
+      .screen,.screen-content,.apps,.dock,.app,.icon{pointer-events:auto}
+      .app{touch-action:manipulation;-webkit-tap-highlight-color:transparent;position:relative;z-index:12}
+      .photos-view,.safari-view{z-index:50}
+    }
 
     /* iOS-style Photos app */
     .photos-view{
@@ -454,24 +466,28 @@
       root.style.setProperty('--zoom', zoom);
     }
     function stopFloat(){ phone.classList.remove('resting'); }
-    function resumeFloat(){ if(!dragging) setTimeout(()=>phone.classList.add('resting'), 1400); }
+    function resumeFloat(){ if(!dragging && !matchMedia('(max-width:520px), (pointer:coarse)').matches) setTimeout(()=>phone.classList.add('resting'), 1400); }
 
+    const mobileUI = matchMedia('(max-width:520px), (pointer:coarse)').matches;
+    if(mobileUI){ rx=0; ry=0; apply(); stopFloat(); }
     window.addEventListener('pointerdown', e=>{
-      if(e.target.closest('.app')) return;
+      if(e.target.closest('.app, .photos-view, .safari-view')) return;
+      if(mobileUI) return;
       dragging=true;moved=false;sx=e.clientX;sy=e.clientY;srx=rx;sry=ry;
       stopFloat(); try{phone.setPointerCapture(e.pointerId)}catch{}
     });
     window.addEventListener('pointermove', e=>{
-      if(!dragging) return;
+      if(!dragging || mobileUI) return;
       const dx=e.clientX-sx,dy=e.clientY-sy;
       if(Math.abs(dx)+Math.abs(dy)>3)moved=true;
       ry=sry+dx*.34; rx=Math.max(-38,Math.min(38,srx-dy*.24)); apply();
     });
-    window.addEventListener('pointerup', ()=>{dragging=false;resumeFloat()});
+    window.addEventListener('pointerup', ()=>{dragging=false;if(!mobileUI)resumeFloat()});
     window.addEventListener('wheel', e=>{
       stopFloat(); zoom=Math.max(.72,Math.min(1.22,zoom-e.deltaY*.00055));apply();resumeFloat();
     },{passive:true});
     window.addEventListener('dblclick', ()=>{
+      if(mobileUI) return;
       stopFloat();rx=-4;ry=-14;zoom=1;apply();resumeFloat();
     });
 
