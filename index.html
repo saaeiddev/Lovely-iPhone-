@@ -842,22 +842,25 @@
       el.replaceChildren();
       const canvas = document.createElement('canvas');
       canvas.className = 'gallery-canvas';
-      canvas.width = 240;
-      canvas.height = 240;
+      // iOS Safari can fail when a canvas is painted while its parent Photos view is hidden.
+      // Keep a generous backing store and repaint again when Photos becomes visible.
+      canvas.width = 512;
+      canvas.height = 512;
       el.appendChild(canvas);
 
       const draw = () => {
         if (!galleryImage.naturalWidth || !galleryImage.naturalHeight) return;
-        const ctx = canvas.getContext('2d', {alpha:false});
+        const ctx = canvas.getContext('2d');
         if (!ctx) return;
         const cols = 4, rows = 2;
-        const sw = galleryImage.naturalWidth / cols;
-        const sh = galleryImage.naturalHeight / rows;
+        const sw = Math.floor(galleryImage.naturalWidth / cols);
+        const sh = Math.floor(galleryImage.naturalHeight / rows);
         const col = idx % cols;
         const row = Math.floor(idx / cols);
         ctx.clearRect(0,0,canvas.width,canvas.height);
         ctx.drawImage(galleryImage, col*sw, row*sh, sw, sh, 0, 0, canvas.width, canvas.height);
       };
+      el._drawGalleryPhoto = draw;
 
       if (galleryImage.complete && galleryImage.naturalWidth) draw();
       else galleryImage.addEventListener('load', draw, {once:true});
@@ -873,6 +876,12 @@
 
     function openPhotos(){
       toast.classList.remove('show');
+      // Repaint after the Photos layer is visible; fixes blank thumbnails on iPhone/WebKit.
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{
+        document.querySelectorAll('.photo-thumb, .mini-thumb, .viewer-photo').forEach(el=>{
+          if (typeof el._drawGalleryPhoto === 'function') el._drawGalleryPhoto();
+        });
+      }));
       photosView.classList.add('open');
       photosView.setAttribute('aria-hidden','false');
       stopFloat();
