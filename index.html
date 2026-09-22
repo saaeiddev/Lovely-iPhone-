@@ -200,6 +200,51 @@
     .notes .icon{background:linear-gradient(180deg,rgba(255,242,130,.92) 0 27%,rgba(255,255,255,.68) 27% 100%)}
     .clockapp .icon{background:linear-gradient(145deg,rgba(27,28,31,.88),rgba(8,8,10,.74))}
     .health .icon{background:linear-gradient(145deg,rgba(255,255,255,.8),rgba(245,235,245,.55))}
+
+    /* iOS 27-style first-party icons: sharper layered Liquid Glass, no emoji glyphs. */
+    .icon{
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.64);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.78),
+        inset 0 -1px 0 rgba(0,0,0,.10),
+        0 6px 13px rgba(0,0,0,.22);
+      isolation:isolate;
+    }
+    .icon:before{
+      content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+      background:
+        linear-gradient(155deg,rgba(255,255,255,.42) 0%,rgba(255,255,255,.10) 27%,transparent 47%),
+        radial-gradient(circle at 20% 10%,rgba(255,255,255,.48),transparent 31%);
+      mix-blend-mode:screen;opacity:.78
+    }
+    .icon:after{
+      content:"";position:absolute;inset:1px;z-index:4;pointer-events:none;border-radius:12.7px;
+      box-shadow:inset 0 0 0 .6px rgba(255,255,255,.44),inset 0 -5px 12px rgba(0,0,0,.05)
+    }
+    .glyph{
+      position:absolute;inset:0;z-index:2;width:100%;height:100%;
+      display:grid;place-items:center;filter:none
+    }
+    .glyph svg{display:block;width:100%;height:100%;overflow:visible}
+
+    .photos .icon{background:linear-gradient(145deg,#fff,#f4f4f6 72%,#e8e8ec)}
+    .camera .icon{background:linear-gradient(145deg,#f8f8fa,#c5c8cf 48%,#868b94)}
+    .mail .icon{background:linear-gradient(155deg,#58b9ff 0%,#1679ee 52%,#075bd2 100%)}
+    .maps .icon{background:linear-gradient(145deg,#dff4ef,#f8f4dc 48%,#d7e6f5)}
+    .clockapp .icon{background:linear-gradient(145deg,#242528,#070708 72%)}
+    .health .icon{background:linear-gradient(145deg,#fff,#f7f7f9 68%,#ececf0)}
+    .notes .icon{background:linear-gradient(180deg,#ffd83d 0 24%,#fff 24% 100%)}
+    .settings .icon{background:linear-gradient(145deg,#e1e3e7,#a5aab2 48%,#6f747d)}
+    .phoneapp .icon{background:linear-gradient(145deg,#55eb70,#17c83d 55%,#08a92e)}
+    .safari .icon{background:linear-gradient(145deg,#fdfefe,#e4f3ff 56%,#cfe7fb)}
+    .messages .icon{background:linear-gradient(145deg,#5bf276,#23d64b 54%,#11b936)}
+    .music .icon{background:linear-gradient(145deg,#ff5d88,#f22e61 52%,#d91d4f)}
+
+    @media (max-width:620px){
+      .icon{border-radius:12px}
+      .icon:after{border-radius:10.8px}
+    }
     .dock{
       z-index:2;height:67px;margin-top:9px;border-radius:25px;padding:8px 10px;
       display:grid;grid-template-columns:repeat(4,1fr);gap:9px;
@@ -659,20 +704,20 @@
                 <div class="mini-weather"><strong>22°</strong><small>Clear · Lovely day</small></div>
               </div>
               <div class="apps">
-                <div class="app photos" data-app="Photos"><div class="icon"><span class="glyph">✿</span></div><span class="label">Photos</span></div>
-                <div class="app camera" data-app="Camera"><div class="icon"><span class="glyph">◉</span></div><span class="label">Camera</span></div>
-                <div class="app mail" data-app="Mail"><div class="icon"><span class="glyph">✉</span></div><span class="label">Mail</span></div>
-                <div class="app maps" data-app="Maps"><div class="icon"><span class="glyph">⌖</span></div><span class="label">Maps</span></div>
-                <div class="app clockapp" data-app="Clock"><div class="icon"><span class="glyph">◷</span></div><span class="label">Clock</span></div>
-                <div class="app health" data-app="Health"><div class="icon"><span class="glyph">♥</span></div><span class="label">Health</span></div>
-                <div class="app notes" data-app="Notes"><div class="icon"><span class="glyph">≡</span></div><span class="label">Notes</span></div>
-                <div class="app settings" data-app="Settings"><div class="icon"><span class="glyph">⚙</span></div><span class="label">Settings</span></div>
+                <div class="app photos" data-app="Photos"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><g opacity=".96"><ellipse cx="32" cy="17.2" rx="6.2" ry="12.3" fill="#ff3b4f"/><ellipse cx="42.5" cy="21.6" rx="6.3" ry="12.2" transform="rotate(45 42.5 21.6)" fill="#ff8a1c"/><ellipse cx="46.8" cy="32" rx="12.3" ry="6.2" fill="#ffd338"/><ellipse cx="42.5" cy="42.5" rx="12.2" ry="6.3" transform="rotate(-45 42.5 42.5)" fill="#55c94d"/><ellipse cx="32" cy="46.8" rx="6.2" ry="12.3" fill="#32cda0"/><ellipse cx="21.5" cy="42.5" rx="6.3" ry="12.2" transform="rotate(45 21.5 42.5)" fill="#36a9f5"/><ellipse cx="17.2" cy="32" rx="12.3" ry="6.2" fill="#7d68e8"/><ellipse cx="21.5" cy="21.5" rx="12.2" ry="6.3" transform="rotate(-45 21.5 21.5)" fill="#ef61b2"/></g><circle cx="32" cy="32" r="5.2" fill="rgba(255,255,255,.82)"/></svg></span></div><span class="label">Photos</span></div>
+                <div class="app camera" data-app="Camera"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><radialGradient id="camLens" cx="38%" cy="34%"><stop offset="0" stop-color="#70d6ff"/><stop offset=".18" stop-color="#2d5f83"/><stop offset=".43" stop-color="#0c1520"/><stop offset=".72" stop-color="#020305"/><stop offset="1" stop-color="#262a31"/></radialGradient></defs><circle cx="32" cy="33" r="18.7" fill="#3f444c" opacity=".95"/><circle cx="32" cy="33" r="15.1" fill="#121418" stroke="#777d86" stroke-width="2.2"/><circle cx="32" cy="33" r="11.2" fill="url(#camLens)" stroke="#050608" stroke-width="2"/><circle cx="27.4" cy="28.4" r="2.3" fill="rgba(255,255,255,.72)"/><circle cx="47.4" cy="16.4" r="3.1" fill="#717780" stroke="#b4b8bf" stroke-width=".8"/></svg></span></div><span class="label">Camera</span></div>
+                <div class="app mail" data-app="Mail"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10.5" y="17" width="43" height="30" rx="5.5" fill="#fff"/><path d="M13.8 20.1 32 34.2l18.2-14.1" fill="none" stroke="#3b8ff2" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="m12.8 44 13.8-12.2M51.2 44 37.4 31.8" fill="none" stroke="#d8ecff" stroke-width="2"/></svg></span></div><span class="label">Mail</span></div>
+                <div class="app maps" data-app="Maps"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M0 10 20 5l23 6 21-6v49l-21 5-23-6L0 59Z" fill="#e9f0dd"/><path d="M20 5v48M43 11v48" stroke="#fff" stroke-width="3" opacity=".88"/><path d="M-3 39c11-9 20-11 28-7 9 4 15 14 28 8 5-2 9-6 14-11" fill="none" stroke="#4bbf66" stroke-width="10" opacity=".85"/><path d="M-4 40c12-8 21-9 29-5 9 4 16 11 29 5 5-2 9-5 13-9" fill="none" stroke="#fff" stroke-width="3"/><path d="M23 55c6-12 8-22 7-31" fill="none" stroke="#4a97f0" stroke-width="5" stroke-linecap="round"/><circle cx="29" cy="23" r="3.2" fill="#fff" stroke="#2d7fe5" stroke-width="2"/><path d="M44.8 16.8c0-5.1 4.1-9.2 9.2-9.2s9.2 4.1 9.2 9.2c0 7-9.2 15.7-9.2 15.7s-9.2-8.7-9.2-15.7Z" fill="#ff4a53"/><circle cx="54" cy="16.8" r="3.3" fill="#fff"/></svg></span></div><span class="label">Maps</span></div>
+                <div class="app clockapp" data-app="Clock"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="22.5" fill="#09090a" stroke="#f3f3f5" stroke-width="2"/><g stroke="#f5f5f6" stroke-width="1.8" stroke-linecap="round"><path d="M32 11.5v4"/><path d="M32 48.5v4"/><path d="M11.5 32h4"/><path d="M48.5 32h4"/><path d="m17.5 17.5 2.8 2.8"/><path d="m43.7 43.7 2.8 2.8"/><path d="m46.5 17.5-2.8 2.8"/><path d="m20.3 43.7-2.8 2.8"/></g><path d="M32 32V19.5" stroke="#fff" stroke-width="2.7" stroke-linecap="round"/><path d="m32 32 9.4 5.3" stroke="#fff" stroke-width="2.7" stroke-linecap="round"/><path d="M32 32 28.5 43" stroke="#ff4d44" stroke-width="1.4" stroke-linecap="round"/><circle cx="32" cy="32" r="2.1" fill="#fff"/></svg></span></div><span class="label">Clock</span></div>
+                <div class="app health" data-app="Health"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 47.2C17.4 38 12 31.5 12 23.8 12 17.7 16.8 13 22.9 13c4 0 7.2 2.1 9.1 5.1C33.9 15.1 37.1 13 41.1 13 47.2 13 52 17.7 52 23.8c0 7.7-5.4 14.2-20 23.4Z" fill="#ff3151"/></svg></span></div><span class="label">Health</span></div>
+                <div class="app notes" data-app="Notes"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><rect x="10" y="10" width="44" height="44" rx="7" fill="rgba(255,255,255,.9)"/><rect x="10" y="10" width="44" height="12" rx="7" fill="#ffd52f"/><path d="M10 18h44" stroke="#f4bb16" stroke-width="1"/><g stroke="#c7c8cc" stroke-width="2" stroke-linecap="round"><path d="M17 31h30"/><path d="M17 38h30"/><path d="M17 45h24"/></g></svg></span></div><span class="label">Notes</span></div>
+                <div class="app settings" data-app="Settings"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><g fill="#f1f2f4" stroke="#7c8188" stroke-width="1.4"><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(0 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(45 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(90 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(135 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(180 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(225 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(270 32 32)"/><rect x="29" y="8.5" width="6" height="11" rx="2" transform="rotate(315 32 32)"/></g><circle cx="32" cy="32" r="16.3" fill="#eceef1" stroke="#777c84" stroke-width="2"/><circle cx="32" cy="32" r="7.2" fill="#8a9098" stroke="#f3f4f6" stroke-width="2"/></svg></span></div><span class="label">Settings</span></div>
               </div>
               <div class="dock">
-                <div class="app phoneapp" data-app="Phone"><div class="icon"><span class="glyph">☎</span></div><span class="label">Phone</span></div>
-                <div class="app safari" data-app="Safari"><div class="icon"><span class="glyph">➤</span></div><span class="label">Safari</span></div>
-                <div class="app messages" data-app="Messages"><div class="icon"><span class="glyph">●</span></div><span class="label">Messages</span></div>
-                <div class="app music" data-app="Music"><div class="icon"><span class="glyph">♪</span></div><span class="label">Music</span></div>
+                <div class="app phoneapp" data-app="Phone"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M20.4 14.5c1.8-1.6 4.3-1.2 5.5.9l4.2 7.2c1 1.8.7 3.8-.8 5.2l-3.2 3c3.5 6 8 10.4 14 13.8l2.9-3.1c1.4-1.5 3.5-1.8 5.2-.8l7.2 4.2c2.1 1.2 2.5 3.7.9 5.5l-3.5 3.9c-2 2.2-5.1 3-7.9 2C27.6 50.4 13.7 36.5 7.8 19.2c-1-2.8-.2-5.9 2-7.9l3.9-3.5Z" transform="translate(1 -1) scale(.9)" fill="#fff"/></svg></span></div><span class="label">Phone</span></div>
+                <div class="app safari" data-app="Safari"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="safRing" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#69d6ff"/><stop offset="1" stop-color="#0878e8"/></linearGradient></defs><circle cx="32" cy="32" r="22" fill="#fff" stroke="url(#safRing)" stroke-width="5"/><g stroke="#8ccaf6" stroke-width="1.2"><path d="M32 11v4"/><path d="M32 49v4"/><path d="M11 32h4"/><path d="M49 32h4"/></g><path d="m36 27-12 18 4-17 12-9Z" fill="#e53946"/><path d="m28 37 12-18-4 17-12 9Z" fill="#1586ef"/><circle cx="32" cy="32" r="2.3" fill="#fff" stroke="#75808a" stroke-width="1"/></svg></span></div><span class="label">Safari</span></div>
+                <div class="app messages" data-app="Messages"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 14c-12.6 0-22.8 8.2-22.8 18.3 0 5.5 3.1 10.5 8.1 13.8l-2.8 7.6 8.4-4.2c2.8.7 5.9 1.1 9.1 1.1 12.6 0 22.8-8.2 22.8-18.3S44.6 14 32 14Z" fill="#fff"/></svg></span></div><span class="label">Messages</span></div>
+                <div class="app music" data-app="Music"><div class="icon"><span class="glyph"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M42.7 14.2v26.4c0 5-4 8.8-9.1 8.8-4.3 0-7.7-2.7-7.7-6.2 0-4 4-7.1 9-7.1 1.2 0 2.3.2 3.3.5V20.2l-18.1 4.1v20.1c0 5-4 8.8-9.1 8.8-4.3 0-7.7-2.7-7.7-6.2 0-4 4-7.1 9-7.1 1.2 0 2.3.2 3.3.5V18.7Z" transform="translate(7 -2)" fill="#fff"/></svg></span></div><span class="label">Music</span></div>
               </div>
             </div>
 
