@@ -651,32 +651,10 @@
     }
 
 
-    /* GLB_PHONE_VISUAL_REPLACEMENT_START
-       Only replaces the device shell after its GLB asset actually loads.
-       The existing interactive screen and apps remain untouched. */
-    .phone .real-iphone-model { opacity:0; }
-    .phone.has-external-model .real-iphone-model {
-      opacity:1; position:absolute;inset:0;width:100%;height:100%;
-      z-index:0;pointer-events:none;backface-visibility:visible;
-    }
-    .phone.has-external-model > .side,
-    .phone.has-external-model > .button,
-    .phone.has-external-model > .face.back { display:none !important; }
-    .phone.has-external-model > .face.front {
-      inset:9px; width:auto;height:auto;z-index:2;
-      border:0;padding:0;border-radius:44px;
-      background:transparent;box-shadow:none;
-      transform:translateZ(14px);backface-visibility:hidden;
-      overflow:hidden;
-    }
-    .phone.has-external-model > .face.front > .screen {
-      border:0;border-radius:40px;box-shadow:none;
-    }
-    /* GLB_PHONE_VISUAL_REPLACEMENT_END */
+
   </style>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
-  <script defer src="./phone-model-loader.js"></script>
 </head>
 <body>
   <main class="scene" id="scene" aria-label="Interactive three-dimensional iPhone">
