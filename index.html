@@ -625,27 +625,47 @@
 
     /* Uploaded iPhone 17 Pro Max GLB replaces only the visual handset shell.
        The original interactive HTML screen and application logic remain intact. */
+    .model-screen-anchor{width:1px;height:1px;opacity:0;pointer-events:none;display:block}
+    /* The actual GLB contains the shell. The original iOS DOM is a perspective
+       screen overlay projected onto the GLB's display via four 3D hotspots. */
     #phoneRig{position:relative;width:100%;height:100%;transform-style:preserve-3d}
     #phoneModel{position:absolute;inset:0;width:100%;height:100%;z-index:1;
       display:block;pointer-events:none;background:transparent;--poster-color:transparent;
       opacity:0;transition:opacity .2s ease}
     #phone{position:relative;z-index:2}
     .model-ready #phoneModel{opacity:1}
+    /* Don't flash the old HTML phone floating separately before or behind the GLB. */
+    body.model-ready:not(.screen-aligned) #phone{visibility:hidden!important}
     .model-ready #phone.resting{animation:none!important}
     .model-ready #phone .side,
     .model-ready #phone .button,
     .model-ready #phone .face.back{display:none!important}
     .model-ready #phone .face.front{
-      inset:1.6% 4%;padding:0;transform:translateZ(12px);
-      background:none;box-shadow:none;border-radius:27px;
-      backface-visibility:hidden;overflow:hidden}
-    .model-ready #phone .screen{border-radius:27px;border:0;box-shadow:none}
+      inset:0;width:100%;height:100%;padding:0;transform:none!important;
+      background:none;box-shadow:none;border:none;border-radius:32px;
+      backface-visibility:visible;overflow:hidden;pointer-events:auto}
+    .model-ready #phone .screen{
+      border-radius:32px;border:0;box-shadow:none;pointer-events:auto}
     .model-ready #phone .island{top:5px}
+    body.model-ready.screen-aligned #phone{
+      position:absolute;top:0;left:0;width:100%;height:100%;z-index:3;
+      transform-origin:0 0!important;
+      transform:var(--phone-projection)!important;
+      animation:none!important;transition:none!important;
+      pointer-events:none;visibility:visible!important}
+    body.model-ready.screen-aligned #phone .face.front,
+    body.model-ready.screen-aligned #phone .screen,
+    body.model-ready.screen-aligned #phone .app,
+    body.model-ready.screen-aligned #phone .photos-view,
+    body.model-ready.screen-aligned #phone .safari-view{pointer-events:auto}
     @keyframes phoneRigFloat{
       0%,100%{transform:translateY(-3px)}50%{transform:translateY(6px)}
     }
     .model-ready #phoneRig:has(#phone.resting){animation:phoneRigFloat 5.5s ease-in-out infinite}
     @media(max-width:520px){
+      body.model-ready.screen-aligned #phone{
+        transform:var(--phone-projection)!important;
+        animation:none!important;transition:none!important}
       .model-ready #phone .face.front{backface-visibility:visible}
       .model-ready #phoneRig{animation:none!important}
     }
@@ -655,6 +675,7 @@
   </style>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+  <script defer src="./screen-alignment.js?v=20260925b"></script>
 </head>
 <body>
   <main class="scene" id="scene" aria-label="Interactive three-dimensional iPhone">
@@ -731,6 +752,16 @@
           interpolation-decay="0"
           interaction-prompt="none"
           loading="eager">
+          <!-- Front OLED corners in meters, measured from the uploaded GLB.
+               z is just in front of its -Z facing display (not the rear cameras). -->
+          <span slot="hotspot-screen-tl" data-position="-0.0360 0.0785 -0.00355" data-normal="0 0 -1"
+            class="model-screen-anchor" aria-hidden="true"></span>
+          <span slot="hotspot-screen-tr" data-position="0.0360 0.0785 -0.00355" data-normal="0 0 -1"
+            class="model-screen-anchor" aria-hidden="true"></span>
+          <span slot="hotspot-screen-br" data-position="0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
+            class="model-screen-anchor" aria-hidden="true"></span>
+          <span slot="hotspot-screen-bl" data-position="-0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
+            class="model-screen-anchor" aria-hidden="true"></span>
         </model-viewer>
         <div class="phone resting" id="phone">
         <div class="side left"></div><div class="side right"></div><div class="side top"></div><div class="side bottom"></div>
