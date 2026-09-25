@@ -672,10 +672,297 @@
 
 
 
+  
+    /* September 2026 refinement — Liquid Glass concept and cinematic villa. */
+    :root{
+      --glass:rgba(240,244,255,.17);
+      --glass-strong:rgba(248,251,255,.27);
+      --line:rgba(255,255,255,.48);
+    }
+    body{
+      background:
+        radial-gradient(ellipse at 20% 18%,rgba(129,154,184,.16),transparent 37%),
+        radial-gradient(ellipse at 84% 56%,rgba(184,107,111,.09),transparent 40%),
+        #090b10;
+    }
+    body:before{
+      opacity:.3;
+      animation-duration:50s;
+    }
+    .villa-room{
+      background:
+        radial-gradient(ellipse at 12% 19%,rgba(255,204,157,.2),transparent 37%),
+        radial-gradient(ellipse at 79% 45%,rgba(112,130,185,.19),transparent 52%),
+        linear-gradient(180deg,#242632 0%,#191d25 53%,#0e1016 54%,#0b0d12 100%);
+    }
+    .villa-room:before{
+      content:"";position:absolute;inset:0;z-index:21;pointer-events:none;
+      background:
+        linear-gradient(109deg,rgba(255,226,189,.085),transparent 32% 67%,rgba(118,151,211,.025)),
+        radial-gradient(ellipse at 48% 75%,transparent 22%,rgba(4,6,10,.34) 93%);
+      mix-blend-mode:screen;
+    }
+    .villa-room:after{
+      background:
+        radial-gradient(ellipse at 51% 48%,transparent 27%,rgba(5,7,12,.20) 76%,rgba(3,4,8,.57) 100%),
+        linear-gradient(90deg,rgba(5,6,9,.12),transparent 31% 73%,rgba(3,4,7,.3));
+    }
+    .villa-wall{
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(244,219,184,.025) 0 2px,transparent 2px 118px,
+          rgba(0,0,0,.07) 119px 122px,transparent 123px 236px),
+        radial-gradient(ellipse at 12% 35%,rgba(248,190,139,.14),transparent 57%),
+        linear-gradient(122deg,#2e2e32 0%,#242730 48%,#151a24 100%);
+      box-shadow:inset 0 -60px 100px rgba(4,5,8,.5);
+    }
+    .villa-ceiling{
+      background:linear-gradient(170deg,#171a1e,#343039);
+      border-bottom:1px solid rgba(255,237,207,.12);
+      box-shadow:0 20px 80px rgba(0,0,0,.43);
+    }
+    .villa-floor{
+      background:
+        repeating-linear-gradient(92deg,rgba(255,223,176,.035) 0 1px,transparent 2px 144px),
+        repeating-linear-gradient(0deg,rgba(0,0,0,.12) 0 2px,transparent 3px 97px),
+        linear-gradient(130deg,#29242a,#13161d 66%,#101219);
+      box-shadow:inset 0 36px 75px rgba(5,5,8,.52);
+    }
+    .villa-floor:before{
+      left:12%;right:9%;top:8%;height:53%;
+      background:radial-gradient(ellipse,rgba(246,170,109,.105),rgba(138,145,198,.07) 39%,transparent 74%);
+      filter:blur(36px);
+    }
+    .villa-window{
+      border-radius:8px;
+      border:9px solid #272a32;
+      outline:1px solid rgba(255,235,211,.12);
+      background:
+        radial-gradient(ellipse at 23% 24%,rgba(255,241,206,.86) 0 1.2%,rgba(255,199,149,.38) 4%,transparent 31%),
+        linear-gradient(180deg,#586477 0%,#af8390 36%,#e5ad92 58%,#b48c85 67%,#414c61 69%,#1d2735 100%);
+      box-shadow:
+        0 18px 52px rgba(0,0,0,.48),
+        0 0 90px rgba(245,167,115,.055),
+        inset 0 0 60px rgba(15,26,42,.34);
+    }
+    .villa-window:before,.villa-window:after{background:#242a31}
+    .villa-window:before{width:10px}
+    .villa-window:after{height:9px}
+    .sunset-hills{opacity:.69;filter:blur(1.2px)}
+    .pool-line{opacity:.4;filter:blur(3px)}
+    .palm{filter:blur(.4px);opacity:.75}
+    .neon-sign{
+      top:74%;font-weight:550;letter-spacing:.26em;
+      color:rgba(255,222,203,.68);
+      text-shadow:0 0 11px rgba(250,173,132,.23);
+      opacity:.75;
+    }
+    .gaming-zone{
+      transform:rotateY(-5deg) translateZ(-20px);
+      filter:drop-shadow(0 16px 18px rgba(0,0,0,.15));
+    }
+    .desk{
+      background:
+        repeating-linear-gradient(92deg,rgba(255,221,172,.03) 0 2px,transparent 2px 38px),
+        linear-gradient(180deg,#57463e 0%,#29252a 32%,#16171b 86%);
+      border-top:2px solid rgba(255,225,187,.3);
+      box-shadow:0 24px 55px rgba(0,0,0,.64),0 -6px 25px rgba(251,188,138,.045);
+    }
+    .desk:before,.desk:after{background:linear-gradient(90deg,#121518,#3b3b3f 51%,#111419)}
+    .monitor{
+      background:linear-gradient(145deg,#45464c,#08090e 27% 77%,#55565d);
+      box-shadow:0 18px 37px rgba(0,0,0,.6),0 0 38px rgba(106,125,180,.075);
+    }
+    .monitor-screen{
+      background:
+        radial-gradient(ellipse at 60% 40%,rgba(241,165,168,.37),transparent 29%),
+        radial-gradient(ellipse at 20% 76%,rgba(99,160,184,.41),transparent 31%),
+        linear-gradient(145deg,#19232e,#45404a 43%,#111c29);
+      box-shadow:inset 0 0 28px rgba(124,183,196,.12),inset 0 0 0 1px rgba(255,255,255,.1);
+    }
+    .monitor-screen:before{opacity:.24}
+    .monitor-screen span{font-weight:500;color:rgba(255,246,240,.83);text-shadow:0 0 14px rgba(255,225,213,.2)}
+    .pc-tower{
+      border:1px solid rgba(238,232,224,.22);
+      background:linear-gradient(125deg,rgba(67,70,73,.94),rgba(12,14,17,.98) 34% 70%,rgba(48,47,51,.96));
+      box-shadow:0 18px 43px rgba(0,0,0,.6),inset 0 0 22px rgba(222,215,211,.035);
+    }
+    .pc-fan{
+      border-color:rgba(198,181,192,.42);
+      box-shadow:0 0 13px rgba(149,167,205,.17),inset 0 0 11px rgba(114,142,159,.3);
+      background:radial-gradient(circle,#0a0d12 0 24%,rgba(150,178,194,.4) 27% 30%,transparent 33%);
+    }
+    .keyboard{box-shadow:0 0 15px rgba(217,173,159,.11)}
+    .gaming-chair{
+      border:1px solid rgba(244,237,230,.16);
+      background:linear-gradient(145deg,#424048,#16181c 43% 66%,#37323a);
+      box-shadow:0 19px 40px rgba(0,0,0,.56),inset 5px 0 13px rgba(225,216,205,.05);
+    }
+    .gaming-chair:after{
+      content:"";position:absolute;inset:9% 12% 15%;border-radius:32% 32% 21% 21%;
+      border:1px dashed rgba(224,218,211,.13);
+    }
+    .shelf{
+      background:linear-gradient(180deg,#766057,#312a2c 45%,#1a1b21);
+      box-shadow:0 13px 21px rgba(0,0,0,.4),0 -1px 13px rgba(247,177,121,.06);
+    }
+    .shelf:after{
+      background:linear-gradient(90deg,transparent,rgba(250,198,150,.62),transparent);
+      opacity:.36;filter:blur(1.7px);
+    }
+    model-viewer.room-figure{filter:drop-shadow(0 14px 16px rgba(0,0,0,.64)) saturate(.87)}
+    .collectible-plinth{
+      background:radial-gradient(ellipse,#76645f,#28262c 68%);
+      box-shadow:0 0 13px rgba(255,201,173,.10);
+    }
+    .lamp-orb{
+      opacity:.75;
+      background:radial-gradient(circle at 41% 39%,#fff2d6 0 8%,#ebc9a9 23%,#bd805e 50%,rgba(155,102,80,.13) 74%,transparent 76%);
+      box-shadow:0 0 39px rgba(255,182,123,.17),0 0 90px rgba(255,157,98,.075);
+    }
+    .ambient-strip{
+      opacity:.45;
+      background:linear-gradient(90deg,transparent,#d1bdba,#b2bcd1,transparent);
+      box-shadow:0 0 13px rgba(219,196,184,.38);
+    }
+    .room-particles{opacity:.16;animation-duration:24s}
+    .scene>.halo{
+      background:radial-gradient(circle,rgba(255,235,214,.045),rgba(146,156,188,.038) 34%,transparent 70%);
+    }
+    .ground{opacity:.9;filter:blur(18px)}
+    .titlebar h1{font-weight:590;letter-spacing:-.05em;text-shadow:0 3px 28px rgba(0,0,0,.45)}
+    .titlebar p{letter-spacing:.24em;color:rgba(255,245,237,.6)}
+    .hint{
+      color:rgba(255,248,239,.76);
+      border:1px solid rgba(255,255,255,.17);
+      background:linear-gradient(135deg,rgba(247,248,250,.15),rgba(156,159,176,.065));
+      backdrop-filter:blur(30px) saturate(170%);
+      -webkit-backdrop-filter:blur(30px) saturate(170%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 17px 35px rgba(0,0,0,.29);
+    }
+
+    /* Dimensional wallpaper, restrained chromatic refraction, and readable SF-style type. */
+    .screen{
+      background:
+        radial-gradient(ellipse at 19% 9%,rgba(236,182,195,.85),transparent 35%),
+        radial-gradient(ellipse at 89% 26%,rgba(127,195,221,.79),transparent 33%),
+        radial-gradient(ellipse at 57% 59%,rgba(109,92,181,.78),transparent 48%),
+        radial-gradient(ellipse at 12% 94%,rgba(42,153,148,.58),transparent 38%),
+        linear-gradient(155deg,#222e5c 0%,#29224f 49%,#101a3d 100%);
+    }
+    .screen:before{
+      inset:-38%;
+      background:
+        conic-gradient(from 214deg at 43% 47%,transparent 0 12%,rgba(255,249,245,.25) 20%,transparent 29% 46%,rgba(219,245,252,.10) 55%,transparent 75%),
+        radial-gradient(ellipse at 53% 32%,rgba(245,238,254,.14),transparent 55%);
+      filter:blur(34px);
+      animation-duration:19s;
+      pointer-events:none;
+    }
+    .screen:after{
+      content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+      background:linear-gradient(138deg,rgba(255,255,255,.085),transparent 28% 75%,rgba(9,16,35,.17));
+    }
+    .screen-content{z-index:1}
+    .status{font-weight:680;letter-spacing:-.02em;text-shadow:0 1px 8px rgba(10,13,32,.27)}
+    .island{
+      background:linear-gradient(145deg,#080a0d,#000);
+      box-shadow:0 1px 0 rgba(255,255,255,.13),inset 0 1px 4px rgba(0,0,0,.6),0 3px 12px rgba(7,11,24,.26);
+    }
+    .clock{font-size:55px;font-weight:240;letter-spacing:-.073em;text-shadow:0 5px 23px rgba(20,13,40,.22)}
+    .date{font-weight:540;letter-spacing:.006em;text-shadow:0 2px 7px rgba(0,0,0,.23)}
+    .mini-weather{
+      background:linear-gradient(145deg,rgba(255,255,255,.35),rgba(255,255,255,.12) 48%,rgba(209,225,250,.12));
+      border:1px solid rgba(255,255,255,.46);
+      border-top-color:rgba(255,255,255,.68);
+      backdrop-filter:blur(27px) saturate(185%) brightness(1.06);
+      -webkit-backdrop-filter:blur(27px) saturate(185%) brightness(1.06);
+      box-shadow:inset 0 1px 1px rgba(255,255,255,.53),inset 0 -1px 0 rgba(255,255,255,.15),0 9px 24px rgba(16,15,49,.16);
+    }
+    .mini-weather:before{opacity:.38}
+    .app .icon{
+      border-radius:15px;
+      border:1px solid rgba(255,255,255,.63);
+      background-clip:padding-box;
+      box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.85),
+        inset 0 -2px 2px rgba(0,0,0,.07),
+        0 8px 14px rgba(9,14,39,.25),
+        0 2px 3px rgba(10,10,32,.14);
+      backdrop-filter:blur(14px) saturate(190%);
+      -webkit-backdrop-filter:blur(14px) saturate(190%);
+      transition:transform .21s cubic-bezier(.2,.85,.25,1.15),filter .22s,box-shadow .22s;
+    }
+    .icon:before{
+      opacity:.58;
+      background:linear-gradient(144deg,rgba(255,255,255,.39) 0%,rgba(255,255,255,.09) 27%,transparent 50%);
+    }
+    .icon:after{
+      border-radius:14px;
+      box-shadow:inset 0 0 0 .7px rgba(255,255,255,.43),inset 0 -8px 14px rgba(0,0,0,.08);
+    }
+    .app:hover .icon{
+      transform:translateY(-3px) scale(1.065);
+      filter:brightness(1.035);
+      box-shadow:inset 0 1px 1px rgba(255,255,255,.88),0 11px 22px rgba(9,14,39,.33);
+    }
+    .app:active .icon{transform:scale(.945);filter:brightness(1.09)}
+    .label{font-size:9px;font-weight:500;letter-spacing:-.01em;text-shadow:0 2px 8px rgba(7,8,26,.55)}
+    .dock{
+      border-radius:28px;
+      background:linear-gradient(155deg,rgba(255,255,255,.39),rgba(244,248,255,.18) 49%,rgba(216,234,248,.12));
+      border:1px solid rgba(255,255,255,.53);
+      border-top-color:rgba(255,255,255,.68);
+      backdrop-filter:blur(34px) saturate(200%);
+      -webkit-backdrop-filter:blur(34px) saturate(200%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -1px 0 rgba(255,255,255,.12),0 12px 32px rgba(9,13,40,.24);
+    }
+    .homebar{box-shadow:0 1px 8px rgba(0,0,0,.19),0 0 0 1px rgba(255,255,255,.12)}
+    .toast{
+      border:1px solid rgba(255,255,255,.46);
+      background:linear-gradient(145deg,rgba(60,72,108,.65),rgba(31,39,72,.52));
+      backdrop-filter:blur(28px) saturate(175%);
+      -webkit-backdrop-filter:blur(28px) saturate(175%);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.21),0 10px 30px rgba(6,10,30,.3);
+    }
+    .photos-view,.safari-view{
+      background:rgba(248,249,252,.93);
+      backdrop-filter:blur(35px) saturate(170%);
+      -webkit-backdrop-filter:blur(35px) saturate(170%);
+    }
+    .photos-shell,.safari-shell{
+      background:linear-gradient(160deg,rgba(255,255,255,.93),rgba(239,241,248,.91) 57%,rgba(234,239,248,.95));
+    }
+    .safari-address{
+      background:rgba(224,229,241,.73);
+      border:1px solid rgba(255,255,255,.8);
+      box-shadow:inset 0 1px 3px rgba(23,32,53,.045),0 4px 13px rgba(45,54,84,.07);
+    }
+    .safari-toolbar{
+      background:rgba(247,250,255,.68);
+      border:1px solid rgba(255,255,255,.92);
+      backdrop-filter:blur(30px) saturate(200%);
+      -webkit-backdrop-filter:blur(30px) saturate(200%);
+      box-shadow:inset 0 1px 0 white,0 9px 26px rgba(26,37,66,.16);
+    }
+    @media(max-width:620px){
+      .villa-room{filter:saturate(.84) brightness(.84)}
+      .gaming-zone{transform:rotateY(-5deg)}
+      .villa-window{opacity:.86}
+      .app .icon{border-radius:12.5px}
+      .icon:after{border-radius:11.5px}
+      .clock{font-size:44px}
+      .hint{background:rgba(45,47,57,.24);font-size:10px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .screen:before,.room-particles,.mini-weather:before{animation:none}
+      .app .icon{transition:none}
+    }
+
   </style>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
-  <script defer src="./screen-alignment.js?v=20260925b"></script>
+  <script defer src="./screen-alignment.js?v=20260925c"></script>
 </head>
 <body>
   <main class="scene" id="scene" aria-label="Interactive three-dimensional iPhone">
@@ -754,13 +1041,13 @@
           loading="eager">
           <!-- Front OLED corners in meters, measured from the uploaded GLB.
                z is just in front of its -Z facing display (not the rear cameras). -->
-          <span slot="hotspot-screen-tl" data-position="-0.0360 0.0785 -0.00355" data-normal="0 0 -1"
+          <span slot="hotspot-screen-tl" data-position="0.0360 0.0785 -0.00355" data-normal="0 0 -1"
             class="model-screen-anchor" aria-hidden="true"></span>
-          <span slot="hotspot-screen-tr" data-position="0.0360 0.0785 -0.00355" data-normal="0 0 -1"
+          <span slot="hotspot-screen-tr" data-position="-0.0360 0.0785 -0.00355" data-normal="0 0 -1"
             class="model-screen-anchor" aria-hidden="true"></span>
-          <span slot="hotspot-screen-br" data-position="0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
+          <span slot="hotspot-screen-br" data-position="-0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
             class="model-screen-anchor" aria-hidden="true"></span>
-          <span slot="hotspot-screen-bl" data-position="-0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
+          <span slot="hotspot-screen-bl" data-position="0.0360 -0.0785 -0.00355" data-normal="0 0 -1"
             class="model-screen-anchor" aria-hidden="true"></span>
         </model-viewer>
         <div class="phone resting" id="phone">
@@ -1024,7 +1311,7 @@
       resumeFloat();
     }
     function showPhoto(index){
-      activePhoto = (index + 8) % 8;
+      activePhoto = (index + 10) % 10;
       viewerPhoto.className = 'viewer-photo p' + activePhoto;
       renderGalleryTile(viewerPhoto, activePhoto);
       photoCounter.textContent = (activePhoto + 1) + ' of 10';

@@ -56,6 +56,13 @@
       return;
     }
     const points = anchors.map(h => h.canvasPosition);
+    // The -Z-facing OLED is viewed from behind world +X at 180° azimuth:
+    // hotspot names in HTML are intentionally reversed in world-X order.
+    // Reject an accidental mirrored/edge-on projection rather than showing reversed icons.
+    if (points[0].x >= points[1].x || points[3].x >= points[2].x) {
+      document.body.classList.remove('screen-aligned');
+      return;
+    }
     if (points.some(p => !Number.isFinite(p.x) || !Number.isFinite(p.y))) {
       document.body.classList.remove('screen-aligned');
       return;
@@ -81,6 +88,7 @@
   }
   viewer.addEventListener('load', request);
   viewer.addEventListener('camera-change', request);
+  viewer.addEventListener('model-visibility', request);
   viewer.addEventListener('error', fallback);
   if (viewer.loaded) request();
   if (typeof ResizeObserver !== 'undefined') new ResizeObserver(request).observe(viewer);
