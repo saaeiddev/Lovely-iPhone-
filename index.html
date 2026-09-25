@@ -623,6 +623,33 @@
     }
     /* FANTASY_VILLA_ENVIRONMENT_END */
 
+    /* Uploaded iPhone 17 Pro Max GLB replaces only the visual handset shell.
+       The original interactive HTML screen and application logic remain intact. */
+    #phoneRig{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+    #phoneModel{position:absolute;inset:0;width:100%;height:100%;z-index:1;
+      display:block;pointer-events:none;background:transparent;--poster-color:transparent;
+      opacity:0;transition:opacity .2s ease}
+    #phone{position:relative;z-index:2}
+    .model-ready #phoneModel{opacity:1}
+    .model-ready #phone.resting{animation:none!important}
+    .model-ready #phone .side,
+    .model-ready #phone .button,
+    .model-ready #phone .face.back{display:none!important}
+    .model-ready #phone .face.front{
+      inset:1.6% 4%;padding:0;transform:translateZ(12px);
+      background:none;box-shadow:none;border-radius:27px;
+      backface-visibility:hidden;overflow:hidden}
+    .model-ready #phone .screen{border-radius:27px;border:0;box-shadow:none}
+    .model-ready #phone .island{top:5px}
+    @keyframes phoneRigFloat{
+      0%,100%{transform:translateY(-3px)}50%{transform:translateY(6px)}
+    }
+    .model-ready #phoneRig:has(#phone.resting){animation:phoneRigFloat 5.5s ease-in-out infinite}
+    @media(max-width:520px){
+      .model-ready #phone .face.front{backface-visibility:visible}
+      .model-ready #phoneRig{animation:none!important}
+    }
+
   </style>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
@@ -690,7 +717,20 @@
     </header>
 
     <div class="phone-wrap" id="phoneWrap">
-      <div class="phone resting" id="phone">
+      <div class="phone-rig" id="phoneRig">
+        <model-viewer id="phoneModel"
+          src="assets/Phone-17-Pro-Max-web.glb"
+          alt="Ranguel's realistic three-dimensional iPhone 17 Pro Max"
+          camera-orbit="194deg 86deg 0.465m"
+          camera-target="0m 0m 0m"
+          field-of-view="20deg"
+          shadow-intensity="1.1"
+          exposure="1.2"
+          interpolation-decay="0"
+          interaction-prompt="none"
+          loading="eager">
+        </model-viewer>
+        <div class="phone resting" id="phone">
         <div class="side left"></div><div class="side right"></div><div class="side top"></div><div class="side bottom"></div>
         <div class="button power"></div><div class="button action"></div><div class="button vol1"></div><div class="button vol2"></div>
 
@@ -799,6 +839,7 @@
           <div class="applemark">●</div>
           <div class="back-title">Lovely iPhone · 3D Interactive</div>
         </section>
+        </div>
       </div>
     </div>
     <div class="ground"></div>
@@ -811,11 +852,20 @@
     const root = document.documentElement;
     const toast = document.getElementById('toast');
     let rx=-4, ry=-14, zoom=1, dragging=false, sx=0, sy=0, srx=0, sry=0, moved=false, toastTimer;
+    const physicalPhone = document.getElementById('phoneModel');
+    physicalPhone.addEventListener('load', ()=>{
+      document.body.classList.add('model-ready');
+      apply();
+    });
+    physicalPhone.addEventListener('error', ()=>{
+      document.body.classList.remove('model-ready'); // retain the old shell if the GLB cannot load
+    });
 
     function apply(){
       root.style.setProperty('--rx', rx+'deg');
       root.style.setProperty('--ry', ry+'deg');
       root.style.setProperty('--zoom', zoom);
+      physicalPhone.setAttribute('camera-orbit', `${180-ry}deg ${90+rx}deg 0.465m`);
     }
     function stopFloat(){ phone.classList.remove('resting'); }
     function resumeFloat(){ if(!dragging && !matchMedia('(max-width:520px), (pointer:coarse)').matches) setTimeout(()=>phone.classList.add('resting'), 1400); }
