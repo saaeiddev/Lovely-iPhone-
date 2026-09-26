@@ -14,7 +14,7 @@ function invalidate(){if(!renderPending){renderPending=true;requestAnimationFram
 const room=await loader.loadAsync('./assets/room/residence.glb');room.scene.traverse(o=>{if(o.isMesh){o.receiveShadow=true;const m=o.material;if(m.name==='TvScreen'){m.color.set('#152035');m.emissive.set('#1b304a');m.emissiveIntensity=.3}}});scene.add(room.scene);
 // A detailed, bevelled workstation, authored for this scene. Small repeated parts
 // use instancing; figures below use licensed meshes, never primitive mannequins.
-const desk=new THREE.Group();desk.position.set(0,-.95,-2.5);camera.add(desk);
+// Keep the added workstation in its own left-foreground zone, clear of the\n// residence's existing sofa and chair. Scale it as a single assembly so the\n// monitor, PC, peripherals and collectibles retain their relative positions.\nconst desk=new THREE.Group();desk.position.set(-1.35,-1.12,-3.05);desk.scale.setScalar(.70);camera.add(desk);
 const material=(color,roughness=.5,metalness=0)=>new THREE.MeshStandardMaterial({color,roughness,metalness});
 const charcoal=material('#1c2024',.38,.45), aluminium=material('#4b5156',.25,.8), ivory=material('#cfcdc7',.48), rubber=material('#11151a',.9);
 function bevel(w,h,d,r,mat,x,y,z,parent=desk){const m=new THREE.Mesh(new RoundedBoxGeometry(w,h,d,3,r),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
