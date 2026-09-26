@@ -658,6 +658,9 @@
     body.model-ready.screen-aligned #phone .app,
     body.model-ready.screen-aligned #phone .photos-view,
     body.model-ready.screen-aligned #phone .safari-view{pointer-events:auto}
+    /* Closed overlays must never block taps on home-screen apps. */
+    body.model-ready.screen-aligned #phone .photos-view:not(.open),
+    body.model-ready.screen-aligned #phone .safari-view:not(.open){pointer-events:none}
     @keyframes phoneRigFloat{
       0%,100%{transform:translateY(-3px)}50%{transform:translateY(6px)}
     }
