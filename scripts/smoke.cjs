@@ -8,8 +8,9 @@ const assert=require('node:assert/strict');
   browser=await chromium.launch({headless:true,args:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
    const page=await browser.newPage({viewport,hasTouch:viewport.width<700});const errors=[];
-   page.on('pageerror',e=>errors.push(e.message));
-   await page.goto('http://127.0.0.1:8000/'+require('node:path').basename(require('node:path').resolve(__dirname,'..'))+'/',{waitUntil:'networkidle'});
+   page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR',e.message)});page.on('console',m=>{if(m.type()==='error'||m.type()==='warning')console.log('BROWSER',m.text())});
+   try {
+   await page.goto('http://127.0.0.1:8000/'+require('node:path').basename(require('node:path').resolve(__dirname,'..'))+'/',{waitUntil:'domcontentloaded'});
    await page.waitForFunction(()=>document.querySelector('#phoneModel').loaded&&document.body.classList.contains('screen-aligned'),{timeout:60000});
    await page.waitForFunction(()=>document.body.classList.contains('residence-ready'),{timeout:60000});
    await page.getByRole('button',{name:'Front',exact:true}).click();
@@ -27,7 +28,7 @@ const assert=require('node:assert/strict');
    await page.getByRole('button',{name:'Lock',exact:true}).click();await page.getByRole('button',{name:'Unlock',exact:true}).click();
    await page.getByRole('button',{name:'Controls',exact:true}).click();await page.getByRole('button',{name:/WiFi/}).click();assert.ok(await page.getByRole('button',{name:/WiFi/}).innerText().then(t=>t.includes('Off')));await page.getByRole('button',{name:'Done',exact:true}).click();
    await page.getByRole('button',{name:'Back',exact:true}).click();await page.waitForFunction(()=>!document.body.classList.contains('screen-aligned'));await page.getByRole('button',{name:'Front',exact:true}).click();await page.waitForFunction(()=>document.body.classList.contains('screen-aligned'));
-   await page.screenshot({path:'/tmp/lovely-'+viewport.width+'.png'});assert.deepEqual(errors,[]);console.log('PASS',viewport,'gallery, apps, glass, lock, controls, front/back; no page errors');await page.close();
+   await page.screenshot({path:'/tmp/lovely-'+viewport.width+'.png'});assert.deepEqual(errors,[]);console.log('PASS',viewport,'gallery, apps, glass, lock, controls, front/back; no page errors');} finally {await page.screenshot({path:'/tmp/lovely-'+viewport.width+'.png'}).catch(()=>{});await page.close()}
   }
  } finally {await browser?.close();server.kill()}
 })().catch(e=>{console.error(e);process.exitCode=1});

@@ -37,5 +37,10 @@
  let startY=0;overlay.addEventListener('pointerdown',e=>startY=e.clientY);overlay.addEventListener('pointerup',e=>{if(startY-e.clientY>45)overlay.classList.remove('open')});
  document.addEventListener('keydown',e=>{if(e.key==='Escape')home()});
  screen.classList.toggle('dark-ui',read('dark','false')==='true');root.style.setProperty('--glass-tint',.08+Number(read('glass','25'))*.007);
+ const touches=new Map();let pinchStart=0,pinchZoom=1;
+ const distance=()=>{const a=[...touches.values()];return a.length<2?0:Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y)};
+ window.addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||e.target.closest('.screen,.system-toolbar'))return;touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touches.size===2){dragging=false;pinchStart=distance();pinchZoom=zoom;e.stopImmediatePropagation()}},true);
+ window.addEventListener('pointermove',e=>{if(!touches.has(e.pointerId))return;touches.set(e.pointerId,{x:e.clientX,y:e.clientY});if(touches.size===2){dragging=false;zoom=Math.max(.72,Math.min(1.22,pinchZoom*distance()/pinchStart));apply();e.stopImmediatePropagation()}},true);
+ for(const event of ['pointerup','pointercancel'])window.addEventListener(event,e=>{touches.delete(e.pointerId);if(touches.size<2)pinchStart=0},true);
  const status=document.createElement('div');status.className='asset-status';status.setAttribute('role','status');document.body.append(status);status.textContent='Loading original iPhone model…';physicalPhone.addEventListener('load',()=>status.textContent='');physicalPhone.addEventListener('error',()=>status.textContent='3D model unavailable. Interactive 2D mode is active.');if(physicalPhone.loaded)status.textContent='';
 })();

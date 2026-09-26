@@ -989,7 +989,7 @@
       <div class="collectible-plinth"></div>
 
       <model-viewer class="room-figure figure-a"
-        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+        src="./assets/figures/astronaut.glb"
         alt="3D astronaut collectible"
         camera-orbit="-20deg 78deg 115%"
         shadow-intensity="1.2"
@@ -1000,7 +1000,7 @@
       </model-viewer>
 
       <model-viewer class="room-figure figure-b"
-        src="https://modelviewer.dev/shared-assets/models/RobotExpressive.glb"
+        src="./assets/figures/robot.glb"
         alt="3D robot collectible"
         camera-orbit="15deg 78deg 120%"
         shadow-intensity="1.1"
@@ -1189,6 +1189,7 @@
       root.style.setProperty('--rx', rx+'deg');
       root.style.setProperty('--ry', ry+'deg');
       root.style.setProperty('--zoom', zoom);
+      wrap.style.transform=`scale(${zoom})`;
       physicalPhone.setAttribute('camera-orbit', `${180-ry}deg ${90+rx}deg 0.465m`);
     }
     function stopFloat(){ phone.classList.remove('resting'); }
@@ -1208,6 +1209,7 @@
       ry=sry+dx*.34; rx=Math.max(-38,Math.min(38,srx-dy*.24)); apply();
     });
     window.addEventListener('pointerup', ()=>{dragging=false;if(!mobileUI)resumeFloat()});
+    window.addEventListener('pointercancel', ()=>{dragging=false;});
     window.addEventListener('wheel', e=>{
       if(e.target.closest('.screen,.system-toolbar')) return;
       stopFloat(); zoom=Math.max(.72,Math.min(1.22,zoom-e.deltaY*.00055));apply();resumeFloat();
