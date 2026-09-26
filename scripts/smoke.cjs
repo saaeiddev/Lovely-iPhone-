@@ -7,7 +7,9 @@ const assert=require('node:assert/strict');
  try {
   browser=await chromium.launch({headless:true,args:['--enable-webgl','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
   for(const viewport of [{width:1440,height:1000},{width:390,height:844}]){
-   const page=await browser.newPage({viewport,hasTouch:viewport.width<700});const errors=[];
+   const page=await browser.newPage({viewport,hasTouch:viewport.width<700});
+   // Freeze ambient motion for deterministic UI hit-testing; the site also supports this OS preference.
+   await page.emulateMedia({reducedMotion:'reduce'});const errors=[];
    page.on('pageerror',e=>{errors.push(e.message);console.log('PAGE ERROR',e.message)});page.on('console',m=>{if(m.type()==='error'||m.type()==='warning')console.log('BROWSER',m.text())});
    try {
    await page.goto('http://127.0.0.1:8000/'+require('node:path').basename(require('node:path').resolve(__dirname,'..'))+'/',{waitUntil:'domcontentloaded'});
